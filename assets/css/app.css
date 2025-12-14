@@ -6,6 +6,17 @@ html{font-size:14px;}.tab-content > .tab-pane,[class~=custom-radio] li input{dis
 /*===================================================================
 2. Animate
 ====================================================================*/
+/* === SOLO CELULAR === */
+.only-mobile {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.only-mobile {
+		display: block;
+	}
+}
+
 @keyframes e {
   0% {
     transform: scale(1);
