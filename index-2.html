@@ -377,9 +377,44 @@ Con la bendición de Dios y el apoyo de nuestras familias, hemos decidido unir n
 											<h2 class="intro-title">
 										 		MOJURI JEWERLY
 											</h2>
-											<div class="intro-text">
-												To provide the best designer jewelry at a reasonable price, while revolutionizing the jewelry industry with transparency and honesty.
-											</div>
+											   <!-- Contador centrado -->
+          <div style="width: 100%; text-align: center; margin-top: 10px;">
+            <div id="countdown" class="intro-item" style="display: inline-block; background: #ffffffd9; padding: 15px 30px; border-radius: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.15);"></div>
+          </div>
+		   <!-- Script del contador -->
+  <script>
+    // Fecha objetivo: 21 febrero 2026, 7:30 PM hora local
+    const targetDate = new Date("February 21, 2026 19:30:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownEl.innerHTML = "¡El gran día ha llegado!";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownEl.innerHTML = `
+        <span style="font-size:12pt;">Faltan:&nbsp;</span>
+        <span style="font-size:12pt;">
+          ${days} días : ${hours.toString().padStart(2, '0')} hrs : 
+          ${minutes.toString().padStart(2, '0')} min : 
+          ${seconds.toString().padStart(2, '0')} seg
+        </span>
+      `;
+    }
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+  </script>
 										</div>
 									</div>
 								</div>	
