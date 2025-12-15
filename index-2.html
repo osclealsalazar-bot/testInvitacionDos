@@ -1815,49 +1815,78 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 				</div> 
 			</div>
 		</div>
-		<script>
-	(function () {
-		if (window.innerWidth <= 768) {
+	<script>
+(function () {
+	if (window.innerWidth > 768) return;
 
-			var popupContainer = document.querySelector('.newsletter-container');
-			var popupImgContainer = document.querySelector('.newsletter-img');
-			var popupImg = document.querySelector('.newsletter-img img');
-			var popupForm = document.querySelector('.newsletter-form');
+	function cleanPopup() {
+		var popupForm = document.querySelector('.newsletter-form');
+		var popupImgContainer = document.querySelector('.newsletter-img');
+		var popupImg = document.querySelector('.newsletter-img img');
+		var popupContainer = document.querySelector('.newsletter-container');
+		var closeBtn = document.querySelector('.newsletter-close');
 
-			if (popupContainer && popupImgContainer && popupImg && popupForm) {
-
-				/* Layout vertical */
-				popupContainer.style.display = 'flex';
-				popupContainer.style.flexDirection = 'column';
-
-				/* Texto arriba */
-				popupForm.style.order = '0';
-				popupForm.style.width = '100%';
-				popupForm.style.margin = '0';
-				popupForm.style.padding = '0';
-
-				/* Imagen abajo, pegada */
-				popupImgContainer.style.order = '1';
-				popupImgContainer.style.display = 'flex';
-				popupImgContainer.style.justifyContent = 'center';
-				popupImgContainer.style.alignItems = 'center';
-
-				/* Fondo negro SIN espacios */
-				popupImgContainer.style.backgroundColor = '#000';
-				popupImgContainer.style.padding = '10px 0'; // solo vertical mínimo
-				popupImgContainer.style.margin = '0';
-				popupImgContainer.style.borderRadius = '0';
-				popupImgContainer.style.width = '100%';
-
-				/* Ajuste de imagen */
-				popupImg.style.maxWidth = '160px';
-				popupImg.style.width = '100%';
-				popupImg.style.height = 'auto';
-				popupImg.style.display = 'block';
-			}
+		/* ❌ Eliminar área blanca */
+		if (popupForm) {
+			popupForm.remove();
 		}
-	})();
+
+		/* 🖼 Solo imagen */
+		if (popupContainer && popupImgContainer && popupImg) {
+			popupContainer.style.display = 'flex';
+			popupContainer.style.flexDirection = 'column';
+			popupContainer.style.padding = '0';
+			popupContainer.style.margin = '0';
+
+			popupImgContainer.style.display = 'flex';
+			popupImgContainer.style.justifyContent = 'center';
+			popupImgContainer.style.alignItems = 'center';
+			popupImgContainer.style.backgroundColor = '#000';
+			popupImgContainer.style.width = '100%';
+			popupImgContainer.style.padding = '40px 0';
+			popupImgContainer.style.margin = '0';
+
+			popupImg.style.maxWidth = '220px';
+			popupImg.style.width = '100%';
+			popupImg.style.height = 'auto';
+		}
+
+		/* ✖️ BOTÓN CERRAR – estilo gris visible */
+		if (closeBtn) {
+			closeBtn.style.position = 'absolute';
+			closeBtn.style.top = '12px';
+			closeBtn.style.right = '12px';
+			closeBtn.style.zIndex = '9999';
+
+			/* círculo */
+			closeBtn.style.backgroundColor = '#e0e0e0';
+			closeBtn.style.borderRadius = '50%';
+			closeBtn.style.width = '32px';
+			closeBtn.style.height = '32px';
+
+			/* X */
+			closeBtn.style.color = '#666';
+			closeBtn.style.fontSize = '18px';
+			closeBtn.style.lineHeight = '32px';
+			closeBtn.style.textAlign = 'center';
+
+			closeBtn.style.opacity = '1';
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', cleanPopup);
+	setTimeout(cleanPopup, 300);
+	setTimeout(cleanPopup, 800);
+
+	var observer = new MutationObserver(cleanPopup);
+	observer.observe(document.body, {
+		childList: true,
+		subtree: true
+	});
+})();
 </script>
+
+
 
 
 		<!-- Page Loader -->
