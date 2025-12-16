@@ -714,64 +714,69 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		<section class="section section-padding m-b-70">
 	<div class="section-container small">
 
-		<div class="block block-intro layout-3 text-center">
+		<div class="block block-intro layout-4 text-center">
 			<div class="block-widget-wrap">
 
+				<!-- Título / Concepto -->
 				<h2 class="intro-title black"
-					style="font-size:21pt; line-height:1.1; text-transform:uppercase;">
-					Confirmación de asistencia
+					style="font-size: 21pt; line-height: 1.1; text-transform: uppercase;">
+					Confirmación de Asistencia
 				</h2>
 
-				<div class="intro-item" style="max-width:520px; margin:0 auto 30px;">
-					Agradecemos mucho que nos confirmes tu asistencia.
-					Tu respuesta es muy importante para nosotros.
+				<div class="intro-item" style="margin-top:15px;">
+					Agradecemos nos confirmes tu asistencia para poder preparar
+					cada detalle con mucho cariño.
 				</div>
 
-				<!-- FORMULARIO -->
-				<form id="rsvpForm" style="max-width:520px; margin:0 auto;">
+				<!-- Espacio visual -->
+				<div style="height:35px;"></div>
 
-					<div class="intro-item">
-						<label>Número de asistentes</label>
-						<select name="asistentes" required class="form-control">
-							<option value="">Selecciona</option>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-						</select>
-					</div>
+				<!-- Formulario -->
+				<div style="max-width:420px; margin:0 auto;">
 
-					<div class="intro-item">
-						<label>Nombre</label>
-						<input type="text" name="nombre" class="form-control" required>
-					</div>
+					<form id="rsvpForm">
 
-					<div class="intro-item">
-						<label>Apellido</label>
-						<input type="text" name="apellido" class="form-control" required>
-					</div>
+						<div class="form-group" style="margin-bottom:18px;">
+							<label class="rsvp-label">Número de asistentes</label>
+							<select name="asistentes" required class="rsvp-input">
+								<option value="">Selecciona</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+								<option>5</option>
+								<option>6</option>
+							</select>
+						</div>
 
-					<div class="intro-item">
-						<label>Contacto</label>
-						<input type="text" name="contacto" class="form-control"
-							   placeholder="Teléfono o correo" required>
-					</div>
+						<div class="form-group" style="margin-bottom:18px;">
+							<label class="rsvp-label">Nombre</label>
+							<input type="text" name="nombre" required class="rsvp-input">
+						</div>
 
-					<div class="intro-btn" style="margin-top:30px;">
+						<div class="form-group" style="margin-bottom:18px;">
+							<label class="rsvp-label">Apellido</label>
+							<input type="text" name="apellido" required class="rsvp-input">
+						</div>
+
+						<div class="form-group" style="margin-bottom:25px;">
+							<label class="rsvp-label">Teléfono</label>
+							<input type="text" name="contacto" required class="rsvp-input">
+						</div>
+
 						<button type="submit"
-							class="button button-black animation-horizontal">
+							class="button button-black animation-horizontal"
+							style="width:100%;">
 							Confirmar asistencia
 						</button>
+
+					</form>
+
+					<div id="successMsg"
+						style="display:none; margin-top:25px; color:#4caf50; font-size:14px;">
+						Gracias por confirmar tu asistencia ✨
 					</div>
 
-				</form>
-
-				<!-- MENSAJE DE ÉXITO -->
-				<div id="successMsg"
-					style="display:none; margin-top:25px; font-size:14px; color:#3a7d44;">
-					✨ Gracias por confirmar tu asistencia ✨
 				</div>
 
 			</div>
@@ -1095,18 +1100,47 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		<script src="libs/slick/js/slick.min.js"></script>
 		<script src="libs/mmenu/js/jquery.mmenu.all.min.js"></script>
 		
-		<!-- Site Scripts -->
-		<script src="assets/js/app.js"></script>
+<style>
+.rsvp-label {
+	display:block;
+	font-size:11px;
+	letter-spacing:1px;
+	text-transform:uppercase;
+	margin-bottom:6px;
+	color:#777;
+	text-align:left;
+}
 
-		<script>
+.rsvp-input {
+	width:100%;
+	padding:14px 12px;
+	border-radius:10px;
+	border:1px solid #ddd;
+	font-size:15px;
+	background:#fff;
+	transition:border-color .2s ease, box-shadow .2s ease;
+}
+
+.rsvp-input:focus {
+	border-color:#000;
+	outline:none;
+	box-shadow:0 0 0 2px rgba(0,0,0,.08);
+}
+
+/* Evita que el borde desaparezca al escribir */
+.rsvp-input:not(:focus) {
+	border-color:#ddd;
+}
+</style>
+<script>
 document.getElementById("rsvpForm").addEventListener("submit", function(e) {
 	e.preventDefault();
 
 	const data = {
-		asistentes: this.asistentes.value,
-		nombre: this.nombre.value,
-		apellido: this.apellido.value,
-		contacto: this.contacto.value
+		NumeroDeLugares: this.asistentes.value,
+		Nombre: this.nombre.value,
+		Apellido: this.apellido.value,
+		Telefono: this.contacto.value
 	};
 
 	fetch("https://script.google.com/macros/s/AKfycbyyfCh2jMBCJxNXqRS7x4hOicYlKEJn3N-H53XMMtNTJNU5aU1lxmsCcBVYst2SgTD05A/exec", {
@@ -1122,6 +1156,7 @@ document.getElementById("rsvpForm").addEventListener("submit", function(e) {
 	.catch(() => alert("Ocurrió un error. Intenta de nuevo."));
 });
 </script>
+
 
 
 	</body>
