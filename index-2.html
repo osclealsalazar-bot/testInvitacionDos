@@ -711,7 +711,75 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 	</div>
 </section>
 
-		
+		<section class="section section-padding m-b-70">
+	<div class="section-container small">
+
+		<div class="block block-intro layout-3 text-center">
+			<div class="block-widget-wrap">
+
+				<h2 class="intro-title black"
+					style="font-size:21pt; line-height:1.1; text-transform:uppercase;">
+					Confirmación de asistencia
+				</h2>
+
+				<div class="intro-item" style="max-width:520px; margin:0 auto 30px;">
+					Agradecemos mucho que nos confirmes tu asistencia.
+					Tu respuesta es muy importante para nosotros.
+				</div>
+
+				<!-- FORMULARIO -->
+				<form id="rsvpForm" style="max-width:520px; margin:0 auto;">
+
+					<div class="intro-item">
+						<label>Número de asistentes</label>
+						<select name="asistentes" required class="form-control">
+							<option value="">Selecciona</option>
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+							<option>6</option>
+						</select>
+					</div>
+
+					<div class="intro-item">
+						<label>Nombre</label>
+						<input type="text" name="nombre" class="form-control" required>
+					</div>
+
+					<div class="intro-item">
+						<label>Apellido</label>
+						<input type="text" name="apellido" class="form-control" required>
+					</div>
+
+					<div class="intro-item">
+						<label>Contacto</label>
+						<input type="text" name="contacto" class="form-control"
+							   placeholder="Teléfono o correo" required>
+					</div>
+
+					<div class="intro-btn" style="margin-top:30px;">
+						<button type="submit"
+							class="button button-black animation-horizontal">
+							Confirmar asistencia
+						</button>
+					</div>
+
+				</form>
+
+				<!-- MENSAJE DE ÉXITO -->
+				<div id="successMsg"
+					style="display:none; margin-top:25px; font-size:14px; color:#3a7d44;">
+					✨ Gracias por confirmar tu asistencia ✨
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</section>
+
 
 						
 <section class="section section-padding background-img bg-img-5 p-t-120 p-b-120 m-b-0">
@@ -1034,6 +1102,32 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		
 		<!-- Site Scripts -->
 		<script src="assets/js/app.js"></script>
+
+		<script>
+document.getElementById("rsvpForm").addEventListener("submit", function(e) {
+	e.preventDefault();
+
+	const data = {
+		asistentes: this.asistentes.value,
+		nombre: this.nombre.value,
+		apellido: this.apellido.value,
+		contacto: this.contacto.value
+	};
+
+	fetch("https://script.google.com/macros/s/AKfycbyyfCh2jMBCJxNXqRS7x4hOicYlKEJn3N-H53XMMtNTJNU5aU1lxmsCcBVYst2SgTD05A/exec", {
+		method: "POST",
+		body: JSON.stringify(data),
+		headers: { "Content-Type": "application/json" }
+	})
+	.then(res => res.json())
+	.then(() => {
+		document.getElementById("rsvpForm").reset();
+		document.getElementById("successMsg").style.display = "block";
+	})
+	.catch(() => alert("Ocurrió un error. Intenta de nuevo."));
+});
+</script>
+
 
 	</body>
 
