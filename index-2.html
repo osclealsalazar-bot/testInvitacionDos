@@ -930,10 +930,18 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		<!-- Site Scripts -->
 		<script src="assets/js/app.js"></script>
 
-	<!-- Audio -->
-<audio id="weddingAudio" preload="auto">
+<!-- Audio -->
+<audio id="weddingAudio" muted playsinline preload="auto">
 	<source src="media/product/lanacancion.mp3" type="audio/mpeg">
 </audio>
+
+<!-- Widget flotante -->
+<div class="audio-widget">
+	<button id="audioToggle" aria-label="Reproducir música">
+		<span id="audioIcon">▶︎</span>
+	</button>
+</div>
+
 <style>
 .audio-widget {
 	position: fixed;
@@ -943,7 +951,6 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 	z-index: 9999;
 }
 
-/* Botón circular */
 .audio-widget button {
 	width: 46px;
 	height: 46px;
@@ -962,25 +969,19 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 	transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.audio-widget button:hover {
-	background: rgba(0,0,0,0.9);
-	transform: scale(1.05);
+@media (hover: hover) {
+	.audio-widget button:hover {
+		background: rgba(0,0,0,0.9);
+		transform: scale(1.05);
+	}
 }
 
-/* iPhone safe area */
 @supports (padding: env(safe-area-inset-right)) {
 	.audio-widget {
 		right: calc(14px + env(safe-area-inset-right));
 	}
 }
 </style>
-
-<!-- Widget flotante -->
-<div class="audio-widget" id="audioWidget">
-	<button id="audioToggle" aria-label="Reproducir música">
-		<span id="audioIcon">▶︎</span>
-	</button>
-</div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 	const audio = document.getElementById('weddingAudio');
@@ -990,28 +991,23 @@ document.addEventListener('DOMContentLoaded', function () {
 	let isPlaying = false;
 
 	toggle.addEventListener('click', function () {
+
 		if (!isPlaying) {
+			audio.muted = false;
+
 			audio.play().then(() => {
 				icon.textContent = '⏸';
 				isPlaying = true;
 			}).catch(() => {
-				alert('Toca nuevamente para reproducir la música 🎶');
+				// Safari iOS ignora silenciosamente
 			});
+
 		} else {
 			audio.pause();
 			icon.textContent = '▶︎';
 			isPlaying = false;
 		}
 	});
-
-	/* Iniciar al primer toque del usuario (UX natural) */
-	document.addEventListener('click', function initAudio() {
-		audio.play().then(() => {
-			icon.textContent = '⏸';
-			isPlaying = true;
-		}).catch(()=>{});
-		document.removeEventListener('click', initAudio);
-	}, { once: true });
 });
 </script>
 
