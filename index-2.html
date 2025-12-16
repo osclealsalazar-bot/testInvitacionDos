@@ -386,7 +386,7 @@ Salón La Cantera</div>
 					<div class="section-column left">
 						<div class="intro-wrap">
 							<h2 class="intro-title black" style="font-size: 22pt; line-height: 1.3; text-transform: uppercase;">
-								Nuestro Programa
+								Itinerario
 
 							</h2>
 
@@ -427,7 +427,7 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		<!-- Block Product Categories -->
 		<div class="block block-product-cats slider round-border">
 			<div class="block-widget-wrap">
-				<div class="block-title"><h2>Nuestro Programa</h2></div>
+				<div class="block-title"><h2>Nuestro Itinerario</h2></div>
 				<div class="block-content">
 					<div class="product-cats-list slick-wrap">
 						<div class="slick-sliders content-category"
@@ -618,6 +618,10 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 						nuestras mesas de regalos para su comodidad.
 					</div>
 
+					<!-- Número de evento -->
+					<div class="intro-item" style="margin-bottom:30px;">
+						<strong>Sobre en recepción</strong><br>
+					</div>
 					<!-- Número de evento -->
 					<div class="intro-item" style="margin-bottom:30px;">
 						<strong>Mesa Liverpool</strong><br>
@@ -815,7 +819,6 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		</div>
 	<script>
 (function () {
-	if (window.innerWidth > 768) return;
 
 	function cleanPopup() {
 		var popupForm = document.querySelector('.newsletter-form');
@@ -824,7 +827,9 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		var popupContainer = document.querySelector('.newsletter-container');
 		var closeBtn = document.querySelector('.newsletter-close');
 
-		/* ❌ Eliminar área blanca */
+		var isMobile = window.innerWidth <= 768;
+
+		/* ❌ Eliminar área blanca (desktop y mobile) */
 		if (popupForm) {
 			popupForm.remove();
 		}
@@ -841,31 +846,34 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 			popupImgContainer.style.alignItems = 'center';
 			popupImgContainer.style.backgroundColor = '#000';
 			popupImgContainer.style.width = '100%';
-			popupImgContainer.style.padding = '40px 0';
 			popupImgContainer.style.margin = '0';
 
-			popupImg.style.maxWidth = '220px';
+			/* Padding distinto */
+			popupImgContainer.style.padding = isMobile ? '40px 0' : '60px 0';
+
+			/* Tamaño imagen */
+			popupImg.style.maxWidth = isMobile ? '220px' : '300px';
 			popupImg.style.width = '100%';
 			popupImg.style.height = 'auto';
 		}
 
-		/* ✖️ BOTÓN CERRAR – estilo gris visible */
+		/* ✖️ BOTÓN CERRAR – visible sobre fondo negro */
 		if (closeBtn) {
 			closeBtn.style.position = 'absolute';
-			closeBtn.style.top = '12px';
-			closeBtn.style.right = '12px';
+			closeBtn.style.top = '14px';
+			closeBtn.style.right = '14px';
 			closeBtn.style.zIndex = '9999';
 
 			/* círculo */
 			closeBtn.style.backgroundColor = '#e0e0e0';
 			closeBtn.style.borderRadius = '50%';
-			closeBtn.style.width = '32px';
-			closeBtn.style.height = '32px';
+			closeBtn.style.width = '34px';
+			closeBtn.style.height = '34px';
 
 			/* X */
 			closeBtn.style.color = '#666';
 			closeBtn.style.fontSize = '18px';
-			closeBtn.style.lineHeight = '32px';
+			closeBtn.style.lineHeight = '34px';
 			closeBtn.style.textAlign = 'center';
 
 			closeBtn.style.opacity = '1';
@@ -887,6 +895,7 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 
 
 
+
 		<!-- Page Loader -->
 		<div class="page-preloader">
 	    	<div class="loader">
@@ -904,6 +913,94 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
 		
 		<!-- Site Scripts -->
 		<script src="assets/js/app.js"></script>
+
+		<!-- Audio -->
+<audio id="bg-music" loop>
+	<source src="media/product/lanacancion.mp3" type="audio/mpeg">
+</audio>
+<style>
+#music-bar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #000;
+	color: #fff;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	padding: 10px 0;
+	z-index: 9999;
+	font-family: inherit;
+}
+
+#music-bar button {
+	background: none;
+	border: none;
+	color: #fff;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+#music-bar span {
+	font-size: 11pt;
+	opacity: 0.85;
+}
+</style>
+
+<!-- Mobile Music Bar -->
+<div id="music-bar">
+	<button id="music-toggle">
+		<i class="fa fa-pause"></i>
+	</button>
+	<span>Nuestra canción</span>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+	const audio = document.getElementById("bg-music");
+	const bar = document.getElementById("music-bar");
+	const btn = document.getElementById("music-toggle");
+	const icon = btn.querySelector("i");
+
+	let started = false;
+
+	function startMusic() {
+		if (!started) {
+			audio.volume = 0.6;
+			audio.play().catch(() => {});
+			started = true;
+		}
+	}
+
+	/* Autoplay en desktop */
+	if (window.innerWidth > 768) {
+		startMusic();
+		bar.style.display = "none";
+	}
+
+	/* Mobile: mostrar barra */
+	if (window.innerWidth <= 768) {
+		bar.style.display = "flex";
+
+		document.body.addEventListener("click", startMusic, { once: true });
+
+		btn.addEventListener("click", function (e) {
+			e.stopPropagation();
+
+			if (audio.paused) {
+				audio.play();
+				icon.className = "fa fa-pause";
+			} else {
+				audio.pause();
+				icon.className = "fa fa-play";
+			}
+		});
+	}
+});
+</script>
+
 	</body>
 
 <!-- Mirrored from caketheme.com/html/mojuri/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Dec 2025 22:59:53 GMT -->
