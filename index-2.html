@@ -807,18 +807,46 @@ destinado solo para adultos.
 	<div class="section-padding">
 		<div class="section-container p-l-r">
 			<div class="shop-checkout rsvp-mobile">
-				<!-- Título estilo intro -->
-					<h2 class="intro-title black"
-						style="font-size: 21pt; line-height: 1.0; text-transform: uppercase; margin-bottom:20px;">
-Confirmación de asistencia					</h2>
 
-				<p class="rsvp-subtitle">Por favor confirma tu asistencia y número de lugares.</p>
+				<h2 class="intro-title black"
+					style="font-size:21pt; line-height:1; text-transform:uppercase; margin-bottom:20px;">
+					Confirmación de asistencia
+				</h2>
+
+				<p class="rsvp-subtitle">
+					Por favor confirma tu asistencia y número de lugares.
+				</p>
 
 				<form id="rsvpForm" onsubmit="sendWhatsApp(); return false;">
 
-					<p class="form-row form-row-wide">
+					<!-- ASISTENCIA -->
+					<div class="attendance-options">
+						<div class="attendance-option">
+							<input type="radio" id="attendYes" name="attendance" value="yes" checked>
+							<label for="attendYes">Sí asistiré</label>
+						</div>
+						<div class="attendance-option">
+							<input type="radio" id="attendNo" name="attendance" value="no">
+							<label for="attendNo">Lo siento, no podré asistir</label>
+						</div>
+					</div>
+
+					<!-- NOMBRE (solo NO asistir) -->
+					<div id="declineName" style="display:none;">
+						<p class="form-row form-row-wide">
+							<label>Nombre</label>
+							<input type="text" id="declineFirst" class="input-text">
+						</p>
+						<p class="form-row form-row-wide">
+							<label>Apellido</label>
+							<input type="text" id="declineLast" class="input-text">
+						</p>
+					</div>
+
+					<!-- NÚMERO DE LUGARES -->
+					<p class="form-row form-row-wide" id="guestsSelectRow">
 						<label>Número de lugares</label>
-						<select id="numGuests" class="input-text" onchange="renderGuests()" required>
+						<select id="numGuests" class="input-text" onchange="renderGuests()">
 							<option value="">Selecciona</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -826,22 +854,27 @@ Confirmación de asistencia					</h2>
 							<option value="4">4</option>
 							<option value="5">5</option>
 							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
 						</select>
 					</p>
 
+					<!-- INVITADOS -->
 					<div id="guestsContainer"></div>
 
+					<!-- TELÉFONO -->
 					<p class="form-row form-row-wide">
 						<label>Teléfono de contacto</label>
 						<input type="tel" id="phone" class="input-text" required placeholder="Ej. 8112345678">
 					</p>
 
+					<!-- BOTÓN -->
 					<p class="form-row form-row-wide">
-						<button type="submit" class="button alt rsvp-btn">
-							Confirmar por WhatsApp
+						<button type="submit" class="button alt rsvp-btn" id="submitBtn">
+							<i class="fa fa-whatsapp"></i> Confirmar por WhatsApp
 						</button>
+					</p>
+
+					<p class="rsvp-note">
+						Si cambias tus planes, por favor avisa directamente al novio o a la novia.
 					</p>
 
 				</form>
@@ -849,126 +882,187 @@ Confirmación de asistencia					</h2>
 		</div>
 	</div>
 </div>
+
 <style>
-/* SOLO PARA RSVP */
-.rsvp-mobile .form-row {
-	margin-bottom: 18px !important;
-}
-
-.rsvp-mobile label {
-	display: block !important;
-	margin-bottom: 8px !important;
-	font-size: 14px;
-}
-
-.rsvp-mobile .input-text,
-.rsvp-mobile select {
-	display: block;
-	width: 100%;
-	margin-top: 0 !important;
-	padding: 12px 14px;
-	height: auto;
-	box-sizing: border-box;
-}
-
-/* INVITADOS */
-.rsvp-mobile .guest-block {
-	margin-top: 24px;
-	padding-top: 12px;
-	border-top: 1px solid #eee;
-}
-
-.rsvp-mobile .guest-title {
-	margin-bottom: 14px;
-	font-size: 16px;
-}
-
-/* BOTÓN */
-.rsvp-mobile .rsvp-btn {
-	margin-top: 24px;
-	width: 100%;
-	padding: 16px;
-}
-/* COLOR DORADO */
+/* ===== RSVP MOBILE ===== */
 :root {
 	--gold: #C9A24D;
 	--gold-dark: #B08A3C;
 }
 
-/* SELECT + INPUT FOCUS */
-.rsvp-mobile select:focus,
-.rsvp-mobile .input-text:focus {
+.rsvp-mobile .form-row {
+	margin-bottom: 18px;
+}
+
+.rsvp-mobile label {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 14px;
+	text-align: left;
+}
+
+.rsvp-mobile .input-text,
+.rsvp-mobile select {
+	width: 100%;
+	padding: 12px 14px;
+	font-size: 16px !important;
+	box-sizing: border-box;
+}
+
+/* ===== RADIO BUTTONS BONITOS ===== */
+.attendance-options {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 24px;
+}
+
+.attendance-option input {
+	display: none;
+}
+
+.attendance-option label {
+	border: 1px solid #ddd;
+	padding: 14px;
+	text-align: center;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.attendance-option input:checked + label {
 	border-color: var(--gold);
-	outline: none;
-	box-shadow: 0 0 0 1px var(--gold);
+	background: rgba(201,162,77,0.1);
+}
+
+/* INVITADOS */
+.guest-block {
+	margin-top: 24px;
+	padding-top: 12px;
+	border-top: 1px solid #eee;
+}
+
+.guest-title {
+	text-align: left;
+	margin-bottom: 10px;
 }
 
 /* BOTÓN */
-.rsvp-mobile .rsvp-btn {
-	background-color: var(--gold);
+.rsvp-btn {
+	width: 100%;
+	padding: 16px;
+	background: var(--gold);
 	border-color: var(--gold);
 	color: #fff;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	font-weight: 500;
 }
 
-.rsvp-mobile .rsvp-btn:hover {
-	background-color: var(--gold-dark);
+.rsvp-btn:hover {
+	background: var(--gold-dark);
 	border-color: var(--gold-dark);
 }
 
-/* EVITA ZOOM EN IOS */
-.rsvp-mobile input,
-.rsvp-mobile select,
-.rsvp-mobile textarea {
-	font-size: 16px !important;
+/* NOTA */
+.rsvp-note {
+	text-align: center;
+	font-size: 13px;
+	margin-top: 12px;
+	color: #666;
 }
-
 </style>
 
 <script>
-	function renderGuests() {
-		const container = document.getElementById('guestsContainer');
-		const num = document.getElementById('numGuests').value;
-		container.innerHTML = '';
+const yesRadio = document.getElementById('attendYes');
+const noRadio = document.getElementById('attendNo');
+const guestsRow = document.getElementById('guestsSelectRow');
+const guestsContainer = document.getElementById('guestsContainer');
+const declineName = document.getElementById('declineName');
+const submitBtn = document.getElementById('submitBtn');
 
-		for (let i = 1; i <= num; i++) {
-			container.innerHTML += `
-				<div class="guest-block">
-					<h4 class="guest-title">Invitado ${i}</h4>
+yesRadio.addEventListener('change', toggleAttendance);
+noRadio.addEventListener('change', toggleAttendance);
 
-					<p class="form-row form-row-wide">
-						<label>Nombre</label>
-						<input type="text" class="input-text guest-name" required>
-					</p>
-
-					<p class="form-row form-row-wide">
-						<label>Apellido</label>
-						<input type="text" class="input-text guest-lastname" required>
-					</p>
-				</div>
-			`;
-		}
+function toggleAttendance() {
+	if (noRadio.checked) {
+		guestsRow.style.display = 'none';
+		guestsContainer.innerHTML = '';
+		declineName.style.display = 'block';
+		submitBtn.innerHTML = '<i class="fa fa-whatsapp"></i> Notificar que no podré asistir';
+	} else {
+		guestsRow.style.display = 'block';
+		declineName.style.display = 'none';
+		submitBtn.innerHTML = '<i class="fa fa-whatsapp"></i> Confirmar por WhatsApp';
 	}
+}
 
-	function sendWhatsApp() {
+function renderGuests() {
+	const num = parseInt(document.getElementById('numGuests').value, 10);
+	guestsContainer.innerHTML = '';
+
+	for (let i = 1; i <= num; i++) {
+		guestsContainer.innerHTML += `
+			<div class="guest-block">
+				<h4 class="guest-title">Invitado ${i}</h4>
+				<p class="form-row">
+					<label>Nombre</label>
+					<input type="text" class="input-text guest-name" required>
+				</p>
+				<p class="form-row">
+					<label>Apellido</label>
+					<input type="text" class="input-text guest-lastname" required>
+				</p>
+			</div>
+		`;
+	}
+}
+
+function sendWhatsApp() {
+	const phone = document.getElementById('phone').value;
+	let message = 'Confirmación de asistencia:%0A%0A';
+
+	if (noRadio.checked) {
+		const name = document.getElementById('declineFirst').value;
+		const last = document.getElementById('declineLast').value;
+		message += `Lamentablemente no podré asistir.%0A`;
+		message += `Nombre: ${name} ${last}%0A`;
+		message += `Teléfono: ${phone}`;
+	} else {
 		const numGuests = document.getElementById('numGuests').value;
-		const phone = document.getElementById('phone').value;
 		const names = document.querySelectorAll('.guest-name');
 		const lastnames = document.querySelectorAll('.guest-lastname');
 
-		let message = `Confirmación de asistencia:%0A`;
 		message += `Número de lugares: ${numGuests}%0A%0A`;
-
-		names.forEach((name, i) => {
-			message += `Invitado ${i + 1}: ${name.value} ${lastnames[i].value}%0A`;
+		names.forEach((n, i) => {
+			message += `Invitado ${i + 1}: ${n.value} ${lastnames[i].value}%0A`;
 		});
-
-		message += `%0ATeléfono de contacto: ${phone}`;
-
-		window.open(`https://wa.me/528140051789?text=${message}`, '_blank');
+		message += `%0ATeléfono: ${phone}`;
 	}
+
+	window.open(`https://wa.me/528140051789?text=${message}`, '_blank');
+}
+</script>
+
+
+<script>
+(function () {
+	function toggleMobileOnlyBlock() {
+		const block = document.querySelector('.shop-details');
+		if (!block) return;
+
+		if (window.innerWidth <= 767) {
+			block.style.display = '';
+		} else {
+			block.style.display = 'none';
+		}
+	}
+
+	// Ejecuta al cargar
+	document.addEventListener('DOMContentLoaded', toggleMobileOnlyBlock);
+
+	// Ejecuta al redimensionar
+	window.addEventListener('resize', toggleMobileOnlyBlock);
+})();
 </script>
 
 
