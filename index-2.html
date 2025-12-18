@@ -1431,6 +1431,65 @@ function toggleFaq(element) {
 		<!-- Site Scripts -->
 		<script src="assets/js/app.js"></script>
 
+		<!-- MUSIC PLAYER -->
+<div class="music-toggle" onclick="toggleMusic()">
+	<i id="musicIcon" class="fa fa-music"></i>
+</div>
+
+<audio id="bgMusic" loop>
+	<source src="media/product/Lanacancion.mp3" type="audio/mpeg">
+</audio>
+<style>
+	.music-toggle {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background: rgba(0,0,0,0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	z-index: 9999;
+}
+
+.music-toggle.playing {
+	background: rgba(201,162,77,0.9);
+}
+
+.music-toggle i {
+	pointer-events: none;
+}
+
+</style>
+<script>
+const music = document.getElementById('bgMusic');
+const toggle = document.querySelector('.music-toggle');
+const icon = document.getElementById('musicIcon');
+
+let isPlaying = false;
+
+function toggleMusic() {
+	if (!isPlaying) {
+		music.volume = 0.4; // elegante, no invasivo
+		music.play();
+		icon.className = 'fa fa-pause';
+		toggle.classList.add('playing');
+		isPlaying = true;
+	} else {
+		music.pause();
+		icon.className = 'fa fa-music';
+		toggle.classList.remove('playing');
+		isPlaying = false;
+	}
+}
+</script>
+
+
 	</body>
 
 <!-- Mirrored from caketheme.com/html/mojuri/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Dec 2025 22:59:53 GMT -->
