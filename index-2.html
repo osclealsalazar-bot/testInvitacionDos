@@ -886,6 +886,42 @@ destinado solo para adultos.
 	width: 100%;
 	padding: 16px;
 }
+/* COLOR DORADO */
+:root {
+	--gold: #C9A24D;
+	--gold-dark: #B08A3C;
+}
+
+/* SELECT + INPUT FOCUS */
+.rsvp-mobile select:focus,
+.rsvp-mobile .input-text:focus {
+	border-color: var(--gold);
+	outline: none;
+	box-shadow: 0 0 0 1px var(--gold);
+}
+
+/* BOTÓN */
+.rsvp-mobile .rsvp-btn {
+	background-color: var(--gold);
+	border-color: var(--gold);
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 500;
+}
+
+.rsvp-mobile .rsvp-btn:hover {
+	background-color: var(--gold-dark);
+	border-color: var(--gold-dark);
+}
+
+/* EVITA ZOOM EN IOS */
+.rsvp-mobile input,
+.rsvp-mobile select,
+.rsvp-mobile textarea {
+	font-size: 16px !important;
+}
+
 </style>
 
 <script>
