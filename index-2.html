@@ -16,7 +16,7 @@
 <meta property="og:description"
       content="Te invitamos a celebrar nuestra boda el 21 de febrero de 2026. Aquí encontrarás la ubicación, programa y mesas de regalo.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://TU_DOMINIO.com/media/banner/og-image.jpg">
+<meta property="og:image" content="media/banner/og-image.jpg">
 <meta property="og:url" content="https://TU_DOMINIO.com">
 
 <!-- Twitter Card -->
@@ -1298,10 +1298,17 @@ function sendWhatsApp() {
 		</div>
 
 		<!-- Back Top button -->
-		<div class="back-top button-show">
-			<i class="arrow_carrot-up"></i>
-		</div>
+<div class="back-top button-show">
+	<i class="arrow_carrot-up"></i>
+</div>
+		<!-- MUSIC PLAYER -->
+<div class="music-toggle" onclick="toggleMusic()">
+	<i id="musicIcon" class="fa fa-music"></i>
+</div>
 
+<audio id="bgMusic" loop preload="auto">
+	<source src="media/product/Lanacancion.mp3" type="audio/mpeg">
+</audio>
 		
 	
 
@@ -1436,14 +1443,12 @@ function toggleFaq(element) {
 	<i id="musicIcon" class="fa fa-music"></i>
 </div>
 
-<audio id="bgMusic" loop>
-	<source src="media/product/Lanacancion.mp3" type="audio/mpeg">
-</audio>
+
 <style>
-	.music-toggle {
+.music-toggle {
 	position: fixed;
-	bottom: 20px;
-	right: 20px;
+	right: 10px;
+	bottom: 10px; /* más arriba que el Back Top */
 	width: 48px;
 	height: 48px;
 	border-radius: 50%;
@@ -1454,28 +1459,38 @@ function toggleFaq(element) {
 	color: #fff;
 	font-size: 16px;
 	cursor: pointer;
-	z-index: 9999;
+	z-index: 10000;
 }
 
 .music-toggle.playing {
 	background: rgba(201,162,77,0.9);
 }
 
-.music-toggle i {
-	pointer-events: none;
-}
+
 
 </style>
 <script>
 const music = document.getElementById('bgMusic');
-const toggle = document.querySelector('.music-toggle');
 const icon = document.getElementById('musicIcon');
+const toggle = document.querySelector('.music-toggle');
 
 let isPlaying = false;
 
+// intenta iniciar tras interacción mínima
+document.addEventListener('click', () => {
+	if (!isPlaying) {
+		music.volume = 0.35;
+		music.play().then(() => {
+			icon.className = 'fa fa-pause';
+			toggle.classList.add('playing');
+			isPlaying = true;
+		});
+	}
+}, { once: true });
+
 function toggleMusic() {
 	if (!isPlaying) {
-		music.volume = 0.4; // elegante, no invasivo
+		music.volume = 0.35;
 		music.play();
 		icon.className = 'fa fa-pause';
 		toggle.classList.add('playing');
@@ -1488,6 +1503,8 @@ function toggleMusic() {
 	}
 }
 </script>
+
+
 
 
 	</body>
