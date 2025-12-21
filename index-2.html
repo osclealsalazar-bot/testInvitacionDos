@@ -413,13 +413,64 @@ Salón La Cantera</div>
 														</div>
 														<div class="intro-item" style="font-size: 10.5pt;">
                
-					<!-- Botón Ver en Google Maps -->
-					<div class="intro-btn">
-						<a href="https://maps.app.goo.gl/gbVWyMe2sDC4WTyP9" target="_blank" 
-						   class="button button-black  animation-horizontal">
-							Ver en Google Maps
-						</a>
-					</div>
+					<!-- 🏨 HOTELES -->
+<div class="col-md-4 sm-m-b-50">
+    <div class="box">
+
+        <div class="box-title-wrap" style="text-align:center;">
+            <h2 class="intro-title black"
+                style="font-size:21pt; line-height:1.0; text-transform:uppercase;">
+                Hoteles recomendados
+            </h2>
+
+            <p class="box-description" style="margin-top:14px; line-height:1.6;">
+                Para su comodidad, compartimos algunas recomendaciones de hospedaje
+                cercanas al lugar del evento.
+            </p>
+
+            <!-- Botón desplegable -->
+            <div class="intro-btn" style="margin-top:12px;">
+                <a href="javascript:void(0);"
+                   class="button button-black animation-horizontal"
+                   onclick="toggleFaq(this)">
+                    Ver recomendación de hoteles
+                </a>
+            </div>
+
+            <!-- Lista de hoteles (oculta) -->
+            <div class="faq-answer"
+                 style="display:none; margin-top:16px; line-height:1.6;">
+
+                <strong>Hotel Real Inn</strong><br>
+                <strong>Fiesta Inn</strong><br>
+                <strong>City Express Plus</strong><br>
+                <strong>Holiday Inn Express</strong><br>
+                <strong>Gamma Rincón de Santiago</strong><br>
+                <strong>Airbnb</strong>
+            </div>
+
+            <!-- Imagen Hoteles -->
+            <img 
+                src="media/product/IconosHotel.png" 
+                alt="Iconos de hoteles recomendados"
+                class="hoteles-icon"
+            >
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+function toggleFaq(el) {
+    const answer = el.closest('.box-title-wrap').querySelector('.faq-answer');
+    answer.style.display = answer.style.display === 'none' || answer.style.display === ''
+        ? 'block'
+        : 'none';
+}
+</script>
+
+
               </div>
 													</div>
 												</div>
@@ -647,57 +698,70 @@ Acompáñanos a celebrar, brindar y disfrutar juntos una noche llena de alegría
     </div>
 </div>
 
-
-				<!-- 🏨 HOTELES -->
+<!-- 🏨 HOTELES -->
 <div class="col-md-4 sm-m-b-50">
-	<div class="box">
+    <div class="box">
 
-		<div class="box-title-wrap">
-			<h2 class="intro-title black"
-				style="font-size:21pt; line-height:1.0; text-transform:uppercase;">
-				Hoteles recomendados
-			</h2>
+        <div class="box-title-wrap" style="text-align:center;">
+            <h2 class="intro-title black"
+                style="font-size:21pt; line-height:1.0; text-transform:uppercase;">
+                Hoteles recomendados
+            </h2>
 
-			<!-- ITEM DESPLEGABLE -->
-			<div class="faq-item"
-				 style="cursor:pointer; margin-top:14px;"
-				 onclick="toggleFaq(this)">
-				Para su comodidad, compartimos algunas recomendaciones de hospedaje cercanas al lugar del evento. 
-				Ver opciones cercanas
-			</div>
+            <p class="box-description" style="margin-top:14px; line-height:1.6;">
+                Para su comodidad, compartimos algunas recomendaciones de hospedaje
+                cercanas al lugar del evento.
+            </p><br>
 
-			<div class="faq-answer"
-				 style="display:none; margin-top:12px; line-height:1.6;">
+            <!-- BOTÓN (misma estructura que Liverpool) -->
+            <div class="intro-btn">
+                <a href="javascript:void(0);"
+                   class="button button-black animation-horizontal"
+                   onclick="toggleHoteles(this)">
+                   
+                    Ver hoteles
+                </a>
+            </div>
 
-				<strong>Opciones recomendadas:</strong><br><br>
+            <!-- LISTA DESPLEGABLE -->
+            <div class="faq-answer"
+                 style="display:none; margin-top:16px; line-height:1.6;">
 
-				<a href="https://www.realinn.com.mx/" target="_blank">
-					Hotel Real Inn
-				</a><br>
+                <strong>Hotel Real Inn</strong><br>
+                <strong>Fiesta Inn</strong><br>
+                <strong>City Express Plus</strong><br>
+                <strong>Holiday Inn Express</strong><br>
+                <strong>Gamma Rincón de Santiago</strong><br>
+                <strong>Airbnb</strong>
+            </div>
 
-				<a href="https://www.fiestainn.com/" target="_blank">
-					Fiesta Inn
-				</a><br>
+            <!-- Imagen Hoteles -->
+            <img 
+                src="media/product/IconosHotel.png" 
+                alt="Iconos de hoteles recomendados"
+                class="hoteles-icon"
+            >
 
-				<a href="https://www.marriott.com/city-express-plus/" target="_blank">
-					City Express Plus
-				</a><br>
+        </div>
 
-				<a href="https://www.ihg.com/holidayinnexpress/" target="_blank">
-					Holiday Inn Express
-				</a><br>
-
-				<a href="https://www.airbnb.mx/s/Monterrey--Nuevo-Le%C3%B3n" target="_blank">
-					Airbnb (Zona Centro / Norte)
-				</a>
-
-			
-			</div>
-
-		</div>
-
-	</div>
+    </div>
 </div>
+
+<script>
+function toggleHoteles(btn) {
+    const wrap = btn.closest('.box-title-wrap');
+    const answer = wrap.querySelector('.faq-answer');
+
+    if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        btn.innerHTML = 'Ver hoteles';
+    } else {
+        answer.style.display = 'block';
+        btn.innerHTML = 'Ocultar';
+    }
+}
+</script>
+
 
 
 					<div class="col-md-4">
