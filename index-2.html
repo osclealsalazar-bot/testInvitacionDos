@@ -271,7 +271,7 @@ section { scroll-margin-top: 140px; }
 	</div>
 </section>
 
-<!-- Script del contador -->
+<!-- Script del contador (SIN segundos) -->
 <script>
 	(function () {
 		const targetDate = new Date("February 21, 2026 19:30:00").getTime();
@@ -289,18 +289,17 @@ section { scroll-margin-top: 140px; }
 			const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 			const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-			const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
 			countdownEl.innerHTML =
 				`FALTAN ${days} D · ${hours.toString().padStart(2, '0')} H · 
-				${minutes.toString().padStart(2, '0')} M · 
-				${seconds.toString().padStart(2, '0')} S`;
+				${minutes.toString().padStart(2, '0')} M`;
 		}
 
 		updateCountdown();
-		setInterval(updateCountdown, 1000);
+		setInterval(updateCountdown, 60000); // actualiza cada minuto
 	})();
 </script>
+
 
 <section class="section section-padding m-b-70">
 								<div class="section-container">
@@ -1323,7 +1322,11 @@ function sendWhatsApp() {
 									<div class="block block-image slider">
 										<div class="block-widget-wrap">
 											<div class="slick-wrap">
-												<div class="slick-sliders" data-nav="0" data-columns4="1" data-columns3="2" data-columns2="3" data-columns1="4" data-columns1440="4" data-columns="5">
+												<div class="slick-sliders"
+     data-autoplay="true"
+     data-autoplayspeed="2000"
+     data-infinite="true"
+     data-speed="800" data-nav="0" data-columns4="1" data-columns3="2" data-columns2="3" data-columns1="4" data-columns1440="4" data-columns="5">
 													<div class="item slick-slide">
 														<div class="item-image animation-horizontal">
 															<a href="#"> 
@@ -1407,6 +1410,8 @@ function sendWhatsApp() {
 									</div>
 								</div>
 							</section>
+
+
 
 
 							
